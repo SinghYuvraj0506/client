@@ -1,7 +1,7 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
-import { productSlice } from "./features/productSlice"
+import { cartSlice } from "./features/cartSlice"
 
-const rootReducer = combineSlices(productSlice)
+const rootReducer = combineSlices(cartSlice)
 export type RootState = ReturnType<typeof rootReducer>
 
 export const makeStore = (preloadedState?: Partial<RootState>) => {

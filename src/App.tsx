@@ -3,13 +3,13 @@ import LandingPage from "./pages/LandingPage";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingCart from "./pages/ShoppingCart";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import ParentLayout from "./layouts/ParentLayout";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <ParentLayout />,
       children: [
         {
           index: true,
@@ -36,13 +36,7 @@ function App() {
     },
   ]);
 
-  return (
-    <div className="w-full relative bg-white">
-      <Navbar />
-      <RouterProvider router={router} />
-      <Footer/>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

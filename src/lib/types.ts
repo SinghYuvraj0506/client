@@ -5,6 +5,10 @@ export type ProductType = {
   description: string;
   image: string;
   category: "electronic" | "jewelery" | "men's clothing" | "women's clothing";
+  rating:{
+    rate: number,
+    count: number
+  }
 };
 
 export type categoryDataType = {
@@ -15,4 +19,13 @@ export type categoryDataType = {
 export type ProductSlice = {
   featured: ProductType[];
   categoryData: categoryDataType[];
+};
+
+export interface CartItem extends ProductType {
+  quantity: number
+}
+
+export type CartSlice = {
+  cart: CartItem[];
+  totalPrice: number
 };

@@ -1,6 +1,5 @@
 import ProductGrid from "../../components/ProductGrid";
 import ProductSlider from "../../components/ProductSlider";
-import { footerData } from "../../lib/constants";
 import { useQuery } from "../../lib/hooks";
 import HeroSection from "./_components/HeroSection";
 

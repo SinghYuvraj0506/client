@@ -5,24 +5,28 @@ export const HeroSectionData = [
         title: "Electronics",
         description: "Discover the latest in electronic devices and gadgets.",
         bgColor: "bg-blue-100",
+        link:'/products?category=electronics'
       },
       {
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVbygcESIw-PFQfFU6fvCz_GHhSPpyHeSDag&s",
         title: "Jewelry",
         description: "Explore our elegant and timeless jewelry collection.",
         bgColor: "bg-purple-100",
+        link:"/products?category=jewelery"
       },
       {
         img: "https://m.media-amazon.com/images/G/31/img24/Fashion/AF/Flip/Springsummerflip/CMLheros/Mens_clothing1._SX1035_QL85_FMpng_.png",
         title: "Men's Clothing",
         description: "Check out the latest styles in men's fashion.",
         bgColor: "bg-green-100",
+        link:"/products?category=men's clothing"
       },
       {
         img: "https://m.media-amazon.com/images/G/31/img2020/fashion/WomensApparel2024/Jupiter/New_Launches_1236x1110._SX1035_QL85_.jpg",
         title: "Women's Clothing",
         description: "Discover trends in women's fashion.",
         bgColor: "bg-pink-100",
+        link:"/products?category=women's clothing"
       },
 ]
 

@@ -7,12 +7,13 @@ import type { AppDispatch, RootState } from "../app/store"
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
 
-export const useQuery = (url:string) => {
+export const useQuery = (url:string, dependency = true) => {
   const [data, setData] = useState<any>(null);      
   const [error, setError] = useState(null);       
   const [loading, setLoading] = useState(true);   
 
   const fetchData = useCallback(async () => {
+    if (!dependency) return; 
     setLoading(true);   
     setError(null);   
 
@@ -24,7 +25,7 @@ export const useQuery = (url:string) => {
     } finally {
       setLoading(false);
     }
-  }, [url]);
+  }, [url, dependency]);
 
   useEffect(() => {
     fetchData();

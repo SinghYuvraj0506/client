@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { HeroSectionData } from '../../../lib/constants';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,7 +38,9 @@ const HeroSection = () => {
           <div className="lg:w-1/2 text-center lg:text-left space-y-4">
             <h2 className="text-3xl font-bold">{HeroSectionData[currentSlide].title}</h2>
             <p className="text-gray-700">{HeroSectionData[currentSlide].description}</p>
-            <button className="bg-blue-800 text-white px-6 py-3 rounded-lg">
+            <button className="bg-blue-800 text-white px-6 py-3 rounded-lg" onClick={()=>{
+              navigate(HeroSectionData[currentSlide].link)
+            }}>
               Shop Now
             </button>
           </div>
