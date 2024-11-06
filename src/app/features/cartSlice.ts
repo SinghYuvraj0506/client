@@ -3,7 +3,12 @@ import { CartItem, CartSlice } from "../../lib/types";
 
 const initialState: CartSlice = {
   cart: [],
-  totalPrice: 0,
+  totalPrice: '0',
+  cartIdMap:[]
+};
+
+const calculateTotal = (cart:CartItem[]) => {
+  return cart.reduce((total, item) => total + item?.price * item?.quantity, 0).toFixed(2);
 };
 
 export const cartSlice = createSlice({
@@ -11,11 +16,16 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action: PayloadAction<{ data: CartItem }>) => {
-      state.cart = [...state.cart, action.payload.data];
+      const finalCart = [...state.cart, action.payload.data];
+      state.cart = finalCart
+      state.cartIdMap = finalCart?.map((e)=>e.id)
+      state.totalPrice = calculateTotal(finalCart)
     },
     removeItemFromCart: (state, action: PayloadAction<{ id: string }>) => {
       const finalCart = state.cart.filter((e) => e.id !== action.payload.id);
       state.cart = finalCart;
+      state.cartIdMap = finalCart?.map((e)=>e.id)
+      state.totalPrice = calculateTotal(finalCart)
     },
     increseQty: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload;
@@ -26,6 +36,8 @@ export const cartSlice = createSlice({
         return e;
       });
       state.cart = finalCart;
+      state.cartIdMap = finalCart?.map((e)=>e.id)
+      state.totalPrice = calculateTotal(finalCart)
     },
     decreseQty: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload;
@@ -43,6 +55,10 @@ export const cartSlice = createSlice({
 
       // @ts-ignore
       state.cart = finalCart;
+      // @ts-ignore
+      state.cartIdMap = finalCart?.map((e)=> e?.id)
+       // @ts-ignore
+       state.totalPrice = calculateTotal(finalCart)
     },
   },
 });

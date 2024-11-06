@@ -9,7 +9,7 @@ import { addItemToCart } from "../app/features/cartSlice";
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch()
-  const {cart} = useAppSelector(state => state.cart)
+  const {cartIdMap} = useAppSelector(state => state.cart)
 
   const { data, loading }: { data: ProductType; loading: boolean } = useQuery(
     import.meta.env.VITE_APP_API_URL + `/products/${id}`,
@@ -41,7 +41,7 @@ const ProductDetail = () => {
     <Loader/>
     </div>
   }
-  
+
 
   return (
     <div className="flex flex-col gap-10 my-10">
@@ -74,8 +74,8 @@ const ProductDetail = () => {
           <p className="text-gray-700 mt-4">{data?.description}</p>
 
           <div className="flex space-x-4 mt-6">
-            <button className="px-6 py-3 bg-primaryYellow text-white font-semibold rounded-lg shadow-md focus:outline-none" onClick={handleAddToCart}>
-              {cart?.find(e=>e?.id=== data?.id)?.title ? "Added to Cart" : "Add to Cart"}
+            <button className={`px-6 py-3 ${cartIdMap?.includes(data?.id) ? 'bg-gray-500' : 'bg-primaryYellow ' } text-white font-semibold rounded-lg shadow-md focus:outline-none`} onClick={handleAddToCart} disabled={cartIdMap?.includes(data?.id)}>
+              {cartIdMap?.includes(data?.id) ? "Added to Cart" : "Add to Cart"}
             </button>
             <button className="px-6 py-3 bg-primaryBlack text-white font-semibold rounded-lg shadow-md focus:outline-none">
               Buy Now

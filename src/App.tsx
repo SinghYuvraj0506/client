@@ -4,6 +4,7 @@ import ProductsPage from "./pages/ProductsPage";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingCart from "./pages/ShoppingCart";
 import ParentLayout from "./layouts/ParentLayout";
+import PaymentStatus from "./pages/PaymentStatus";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
         {
           path: "cart",
           element: <ShoppingCart />,
+        },
+        {
+          path: "payment",
+          element: <PaymentStatus />,
         },
       ],
     },

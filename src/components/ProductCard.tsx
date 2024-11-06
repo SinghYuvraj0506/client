@@ -1,12 +1,13 @@
 import React from "react";
 import { ProductType } from "../lib/types";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../lib/hooks";
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
 import { addItemToCart } from "../app/features/cartSlice";
 
 const ProductCard = ({title, price, image, id, description, category, rating}:ProductType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const {cartIdMap} = useAppSelector(state => state.cart)
 
   const handleAddToCart = (e:Event) => {
     e?.stopPropagation()
@@ -38,8 +39,8 @@ const ProductCard = ({title, price, image, id, description, category, rating}:Pr
       />
       <h3 className="text-lg font-semibold mt-4 text-ellipsis line-clamp-1">{title}</h3>
       <p className="text-gray-600 mt-2">${price}</p>
-      <button className="mt-4 w-full bg-yellow-500 text-gray-900 py-2 rounded-md" onClick={handleAddToCart}>
-        Add to Cart
+      <button className={`mt-4 w-full ${cartIdMap?.includes(id) ? 'bg-gray-500' : 'bg-primaryYellow ' } text-white text-gray-900 py-2 rounded-md`} onClick={handleAddToCart}>
+      {cartIdMap?.includes(id) ? "Added to Cart" : "Add to Cart"}
       </button>
     </div>
   );

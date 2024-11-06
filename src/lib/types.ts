@@ -27,5 +27,6 @@ export interface CartItem extends ProductType {
 
 export type CartSlice = {
   cart: CartItem[];
-  totalPrice: number
+  totalPrice: string;
+  cartIdMap: string[]
 };
