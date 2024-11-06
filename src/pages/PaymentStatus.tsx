@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// Define types for an order item
 interface OrderItem {
   name: string;
   price: number;
@@ -14,14 +13,12 @@ const PaymentStatus: React.FC = () => {
   const [items, setItems] = useState<OrderItem[]>([]);
 
   useEffect(() => {
-    // Parse query parameters
     const queryParams = new URLSearchParams(location.search);
     const status = queryParams.get("orderStatus");
     const itemsParam = queryParams.get("items");
 
     setOrderStatus(status);
     
-    // Parse and set items if available
     if (itemsParam) {
       try {
         const decodedItems: OrderItem[] = JSON.parse(decodeURIComponent(itemsParam));
