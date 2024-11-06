@@ -5,10 +5,12 @@ import {
   removeItemFromCart,
 } from "../app/features/cartSlice";
 import axios from "axios";
+import { useState } from "react";
 
 const ShoppingCart = () => {
   const { cart, totalPrice } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false)
 
   const increaseQuantity = (id: string) => {
     dispatch(increseQty({ id }));
@@ -23,6 +25,7 @@ const ShoppingCart = () => {
   };
 
   const handleCheckout = async () => {
+    setLoading(true)
     try {
       const {data} = await axios.post(`${import.meta.env.VITE_APP_BACKEND_API_URL}/api/v1/payment/createPaymentSession`,{
         items:cart?.map((e)=>{return {
@@ -36,6 +39,9 @@ const ShoppingCart = () => {
       
     } catch (error) {
       console.log(error)
+    }
+    finally{
+      setLoading(false)
     }
   }
 
@@ -99,10 +105,11 @@ const ShoppingCart = () => {
                 <span>Total</span>
                 <span>${(parseFloat(totalPrice)).toFixed(2)}</span>
               </div>
-              <button className="w-full mt-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none"
+              <button className={`w-full mt-6 py-3 ${loading ? `bg-gray-600` : 'bg-yellow-500' }  text-white font-semibold rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none`}
                 onClick={handleCheckout}
+                disabled={loading}
               >
-                Proceed to Checkout
+                {loading? "Processing..." : "Proceed to Checkout"}
               </button>
             </div>
           </div>
